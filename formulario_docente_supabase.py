@@ -4,7 +4,7 @@ from supabase import create_client
 
 # Configuración de Supabase
 SUPABASE_URL = "https://owfpruyynhwfwmoswtyx.supabase.co"
-SUPABASE_KEY = "TU_CLAVE_PUBLICA"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93ZnBydXl5bmh3Zndtb3N3dHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNTAwNjQsImV4cCI6MjA2MzkyNjA2NH0.rH-vDwm02GTIftq-yT53a-mVcr43lPiOcD_F_NDErUU"
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 st.title("Formulario Docente - Registro de Seguimiento de Alumnos")
