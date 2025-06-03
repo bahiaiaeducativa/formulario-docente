@@ -8,6 +8,8 @@ SUPABASE_URL = "https://owfpruyynhwfwmoswtyx.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93ZnBydXl5bmh3Zndtb3N3dHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNTAwNjQsImV4cCI6MjA2MzkyNjA2NH0.rH-vDwm02GTIftq-yT53a-mVcr43lPiOcD_F_NDErUU"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
+st.markdown("**Versión actualizada del formulario 2025 ✅**")
+
 st.set_page_config(page_title="Formulario Docente", page_icon="📋", layout="centered")
 
 st.title("📋 Formulario de Seguimiento Docente")
