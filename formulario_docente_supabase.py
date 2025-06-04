@@ -17,7 +17,7 @@ st.markdown("Complete este formulario para registrar el seguimiento académico y
 
 with st.form("formulario_docente"):
     st.subheader("🧑‍🏫 Datos del estudiante")
-    espacio_curricular = st.selectbox("📚 Espacio Curricular", ["Matemática", "Lengua", "Taller", "Ciencias", "Otro"])
+    espacio_curricular = st.text_input("📚 Espacio Curricular")
     nombre_apellido = st.text_input("👤 Nombre y Apellido del Alumno")
     curso_y_division = st.text_input("🏫 Curso y División")
     edad = st.number_input("🎂 Edad", min_value=10, max_value=25, step=1)
