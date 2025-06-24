@@ -67,15 +67,28 @@ with st.form("formulario_docente"):
 print("\n📌 Tipos de datos en el DataFrame:")
 print(data.dtypes)
 
-# Insertar fila por fila para detectar errores
+from postgrest.exceptions import APIError
+
+# Mostrar tipos de datos para verificar compatibilidad
+print("\n📌 Tipos de datos en el DataFrame:")
+print(data.dtypes)
+
+# Insertar fila por fila y mostrar errores detallados
 for i, fila in data.iterrows():
     try:
-        supabase.table("formulario_docente").insert(fila.to_dict()).execute()
+        result = supabase.table("formulario_docente").insert(fila.to_dict()).execute()
         print(f"✅ Fila {i} insertada correctamente.")
-    except Exception as e:
+    except APIError as e:
         print(f"\n❌ Error en la fila {i}:")
         print(fila.to_dict())
+        print("Mensaje de Supabase:", e.message)
+        print("Detalles:", e.details)
+        print("Código:", e.code)
+        break
+    except Exception as e:
+        print(f"\n❌ Error inesperado en la fila {i}:")
+        print(fila.to_dict())
         print(e)
-        break  # Detenerse en la primera fila con error
+        break
 
         st.success("✅ Los datos han sido registrados correctamente.")
