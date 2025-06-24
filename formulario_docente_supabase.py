@@ -63,5 +63,19 @@ with st.form("formulario_docente"):
             "trae_material_taller": trae_material_taller,
             "fecha": datetime.datetime.now().isoformat()
         }
-        supabase.table("formulario_docente").insert(data).execute()
+        # Mostrar tipos de datos
+print("\n📌 Tipos de datos en el DataFrame:")
+print(data.dtypes)
+
+# Insertar fila por fila para detectar errores
+for i, fila in data.iterrows():
+    try:
+        supabase.table("formulario_docente").insert(fila.to_dict()).execute()
+        print(f"✅ Fila {i} insertada correctamente.")
+    except Exception as e:
+        print(f"\n❌ Error en la fila {i}:")
+        print(fila.to_dict())
+        print(e)
+        break  # Detenerse en la primera fila con error
+
         st.success("✅ Los datos han sido registrados correctamente.")
