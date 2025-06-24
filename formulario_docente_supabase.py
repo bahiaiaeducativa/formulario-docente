@@ -8,7 +8,6 @@ SUPABASE_URL = "https://owfpruyynhwfwmoswtyx.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im93ZnBydXl5bmh3Zndtb3N3dHl4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNTAwNjQsImV4cCI6MjA2MzkyNjA2NH0.rH-vDwm02GTIftq-yT53a-mVcr43lPiOcD_F_NDErUU"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-
 st.set_page_config(page_title="Formulario Docente", page_icon="📋", layout="centered")
 st.markdown("**Versión actualizada del formulario 2025 ✅**")
 
@@ -42,53 +41,42 @@ with st.form("formulario_docente"):
 
     submitted = st.form_submit_button("✅ Enviar")
     if submitted:
-        data = {
-            "espacio_curricular": espacio_curricular,
-            "nombre_apellido": nombre_apellido,
-            "curso_y_division": curso_y_division,
-            "edad": edad,
-            "cuenta_material": cuenta_material,
-            "trabaja_en_clase": trabaja_en_clase,
-            "resolucion_tareas": resolucion_tareas,
-            "tardanza_frecuente": tardanza_frecuente,
-            "respeto_docente": respeto_docente,
-            "estado_carpeta": estado_carpeta,
-            "cantidad_faltas_conducta": cantidad_faltas_conducta,
-            "cantidad_de_faltas": cantidad_de_faltas,
-            "trabajo_en_equipo": trabajo_en_equipo,
-            "interesado_en_clase": interesado_en_clase,
-            "cumple_normas_convivencia": cumple_normas_convivencia,
-            "manejo_herramientas": manejo_herramientas,
-            "usa_epp": usa_epp,
-            "trae_material_taller": trae_material_taller,
-            "fecha": datetime.datetime.now().isoformat()
+        # Validar campos obligatorios
+        campos_obligatorios = {
+            "Espacio Curricular": espacio_curricular,
+            "Nombre y Apellido": nombre_apellido,
+            "Curso y División": curso_y_division
         }
-        # Mostrar tipos de datos
-print("\n📌 Tipos de datos en el DataFrame:")
-print(data.dtypes)
+        campos_faltantes = [campo for campo, valor in campos_obligatorios.items() if not valor.strip()]
 
-from postgrest.exceptions import APIError
+        if campos_faltantes:
+            st.error(f"⚠️ Por favor completá los siguientes campos obligatorios: {', '.join(campos_faltantes)}")
+        else:
+            data = {
+                "espacio_curricular": espacio_curricular.strip(),
+                "nombre_apellido": nombre_apellido.strip(),
+                "curso_y_division": curso_y_division.strip(),
+                "edad": edad,
+                "cuenta_material": cuenta_material,
+                "trabaja_en_clase": trabaja_en_clase,
+                "resolucion_tareas": resolucion_tareas,
+                "tardanza_frecuente": tardanza_frecuente,
+                "respeto_docente": respeto_docente,
+                "estado_carpeta": estado_carpeta,
+                "cantidad_faltas_conducta": cantidad_faltas_conducta,
+                "cantidad_de_faltas": cantidad_de_faltas,
+                "trabajo_en_equipo": trabajo_en_equipo,
+                "interesado_en_clase": interesado_en_clase,
+                "cumple_normas_convivencia": cumple_normas_convivencia,
+                "manejo_herramientas": manejo_herramientas,
+                "usa_epp": usa_epp,
+                "trae_material_taller": trae_material_taller,
+                "fecha": datetime.datetime.now().isoformat()
+            }
 
-# Mostrar tipos de datos para verificar compatibilidad
-print("\n📌 Tipos de datos en el DataFrame:")
-print(data.dtypes)
+            try:
+                supabase.table("formulario_docente").insert(data).execute()
+                st.success("✅ Los datos han sido registrados correctamente.")
+            except Exception as e:
+                st.error(f"❌ Error al registrar los datos: {e}")
 
-# Insertar fila por fila y mostrar errores detallados
-for i, fila in data.iterrows():
-    try:
-        result = supabase.table("formulario_docente").insert(fila.to_dict()).execute()
-        print(f"✅ Fila {i} insertada correctamente.")
-    except APIError as e:
-        print(f"\n❌ Error en la fila {i}:")
-        print(fila.to_dict())
-        print("Mensaje de Supabase:", e.message)
-        print("Detalles:", e.details)
-        print("Código:", e.code)
-        break
-    except Exception as e:
-        print(f"\n❌ Error inesperado en la fila {i}:")
-        print(fila.to_dict())
-        print(e)
-        break
-
-        st.success("✅ Los datos han sido registrados correctamente.")
