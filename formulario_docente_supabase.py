@@ -58,7 +58,7 @@ with st.form("formulario_docente"):
                 "curso_division": curso_y_division.strip(),
                 "edad": edad,
                 "material_didactico": cuenta_material,
-                "trabaja_en_clase": trabaja_en_clase,
+                "trabajo_en_clase": trabaja_en_clase,
                 "resolucion_tareas": resolucion_tareas,
                 "tardanza_frecuente": tardanza_frecuente,
                 "respeto_docente": respeto_docente,
