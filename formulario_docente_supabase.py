@@ -71,7 +71,7 @@ with st.form("formulario_docente"):
                 "manejo_herramientas": manejo_herramientas,
                 "usa_epp": usa_epp,
                 "trae_material_taller": trae_material_taller,
-                "fecha": datetime.datetime.now().isoformat()
+                #"fecha": datetime.datetime.now().isoformat()
             }
 
             try:
