@@ -54,24 +54,24 @@ with st.form("formulario_docente"):
         else:
             data = {
                 "espacio_curricular": espacio_curricular.strip(),
-                "nombre_apellido": nombre_apellido.strip(),
-                "curso_y_division": curso_y_division.strip(),
+                "nombre_alumno": nombre_apellido.strip(),
+                "curso_division": curso_y_division.strip(),
                 "edad": edad,
-                "cuenta_material": cuenta_material,
+                "material_didactico": cuenta_material,
                 "trabaja_en_clase": trabaja_en_clase,
                 "resolucion_tareas": resolucion_tareas,
                 "tardanza_frecuente": tardanza_frecuente,
                 "respeto_docente": respeto_docente,
-                "estado_carpeta": estado_carpeta,
-                "cantidad_faltas_conducta": cantidad_faltas_conducta,
+                "carpeta": estado_carpeta,
+                "faltas_conducta": cantidad_faltas_conducta,
                 "cantidad_de_faltas": cantidad_de_faltas,
-                "trabajo_en_equipo": trabajo_en_equipo,
-                "interesado_en_clase": interesado_en_clase,
-                "cumple_normas_convivencia": cumple_normas_convivencia,
-                "manejo_herramientas": manejo_herramientas,
+                "trabajo_equipo": trabajo_en_equipo,
+                "interes": interesado_en_clase,
+                "normas_convivencia": cumple_normas_convivencia,
+                "manejo_taller": manejo_herramientas,
                 "usa_epp": usa_epp,
-                "trae_material_taller": trae_material_taller,
-                #"fecha": datetime.datetime.now().isoformat()
+                "material_taller": trae_material_taller,
+                "fecha_hora": datetime.datetime.now().isoformat()
             }
 
             try:
